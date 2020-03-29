@@ -6,7 +6,7 @@ using static BreakEdit.InputStrings;
 namespace BreakEdit
 {
 	[AddComponentMenu("BreakEdit/Camera Controller")]
-	public class CameraController : MonoBehaviour
+	public sealed class CameraController : MonoBehaviour
 	{
 		// Settings
 		[Header("Movement Settings")]
@@ -21,8 +21,8 @@ namespace BreakEdit
 		// Input System
 		#pragma warning disable 0649
 		
-		[Header("Input System"), SerializeField]
-		private InputActionAsset inputAsset;
+		[Header("Input System")]
+		public InputActionAsset inputAsset;
 		private InputAction movementAction, movementVerticalAction;
 		private InputAction sprintAction;
 		private InputAction panAction;
@@ -117,7 +117,7 @@ namespace BreakEdit
 			);
 		}
 		
-		protected virtual void HandleMovement(Vector3 input, bool sprint)
+		private void HandleMovement(Vector3 input, bool sprint)
 		{
 			// Check if key released
 			if(input == Vector3.zero && buttonHeld) buttonHeld = false;
@@ -143,7 +143,7 @@ namespace BreakEdit
 		// Rotation vector
 		private Vector3 rotation;
 		
-		protected virtual void HandleLook(Vector2 input, Vector2 inputAlways, bool shouldPan)
+		private void HandleLook(Vector2 input, Vector2 inputAlways, bool shouldPan)
 		{
 			// Mouse
 			if(shouldPan) rotation += new Vector3(-input.y, input.x, 0.0f) * sensitivity;
