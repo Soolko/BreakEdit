@@ -78,19 +78,19 @@ namespace BreakEdit.UI
 			{
 				case Axis.none:
 				default:
-					parent.transform.position = cursorPosition;
+					parent.SetPosition(cursorPosition);
 					break;
 				case Axis.x:
 					parentPosition.x = cursorPosition.x;
-					parent.transform.position = parentPosition;
+					parent.SetPosition(parentPosition);
 					break;
 				case Axis.y:
 					parentPosition.y = cursorPosition.y;
-					parent.transform.position = parentPosition;
+					parent.SetPosition(parentPosition);
 					break;
 				case Axis.z:
 					parentPosition.z = cursorPosition.z;
-					parent.transform.position = parentPosition;
+					parent.SetPosition(parentPosition);
 					break;
 			}
 		}

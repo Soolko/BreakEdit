@@ -10,7 +10,7 @@ namespace BreakEdit.WorldObjects
 	[AddComponentMenu("BreakEdit/World Objects/Brush Face")]
 	[RequireComponent(typeof(MeshFilter))]
 	[RequireComponent(typeof(MeshCollider))]
-	public class BrushFace : MonoBehaviour
+	public class BrushFace : MonoBehaviour, AxisHandle.HandleCallback
 	{
 		[Header("Input System")]
 		public InputActionAsset inputAsset;
@@ -78,6 +78,7 @@ namespace BreakEdit.WorldObjects
 			
 			// Handle
 			handle = Instantiate(handlePrefab, transform, false);
+			handle.callbacks.Add(this);
 			handle.transform.position = centrePosition;
 			handle.OnDeselected();
 			
@@ -115,11 +116,28 @@ namespace BreakEdit.WorldObjects
 			selected = true;
 			handle.OnSelected();
 		}
-		
-		private void CalculateCentrePosition()
+
+		public void PositionChange(Vector3 pos)
+		{
+			Transform t = transform;
+			
+			pos -= t.position;
+			Debug.Log(pos.ToString());
+			
+			for(int i = 0; i < vertices.Length; i++) vertices[i] += pos;
+			
+			Vector3 lastPos = t.position;
+			t.position = CalculateCentrePosition();
+			
+			for(int i = 0; i < vertices.Length; i++) vertices[i] -= t.position - lastPos;
+			
+			GenerateMesh();
+		}
+
+		private Vector3 CalculateCentrePosition()
 		{
 			Vector3 total = vertices.Aggregate(Vector3.zero, (current, vertex) => current + vertex);
-			centrePosition = total / (float) vertices.Length;
+			return total / (float) vertices.Length;
 		}
 	}
 }
