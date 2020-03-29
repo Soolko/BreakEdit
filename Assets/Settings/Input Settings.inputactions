@@ -6,9 +6,33 @@
             "id": "18646c53-eaae-49b1-9082-f758832e2067",
             "actions": [
                 {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "1a2af2a3-4026-43d1-a0dd-bf9459344c99",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap"
+                },
+                {
+                    "name": "Click Down",
+                    "type": "Value",
+                    "id": "f4b24b54-0f0e-4226-86ab-6ff6a857b6f6",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Mouse Position",
+                    "type": "Button",
+                    "id": "4cb8d445-37e6-4c27-8d5a-a4f9d3817985",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Move",
                     "type": "Value",
-                    "id": "1a2af2a3-4026-43d1-a0dd-bf9459344c99",
+                    "id": "1d11e9c2-172c-4724-ae9b-438da39070cd",
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
                     "interactions": ""
@@ -16,7 +40,7 @@
                 {
                     "name": "Vertical Movement",
                     "type": "Button",
-                    "id": "f4b24b54-0f0e-4226-86ab-6ff6a857b6f6",
+                    "id": "01a65a48-8d7f-405f-9b3e-f2377b9bfd29",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -24,7 +48,7 @@
                 {
                     "name": "Sprint",
                     "type": "Button",
-                    "id": "4cb8d445-37e6-4c27-8d5a-a4f9d3817985",
+                    "id": "5fa7b639-8217-4e13-b988-c92c129ac950",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -32,7 +56,7 @@
                 {
                     "name": "Pan Key",
                     "type": "Button",
-                    "id": "1d11e9c2-172c-4724-ae9b-438da39070cd",
+                    "id": "549fa6cb-b58f-4f33-a149-9c6c27f42523",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -40,7 +64,7 @@
                 {
                     "name": "Look",
                     "type": "Value",
-                    "id": "01a65a48-8d7f-405f-9b3e-f2377b9bfd29",
+                    "id": "16cbe492-a828-4e3f-9a36-b4ccba4f71b5",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
@@ -48,7 +72,7 @@
                 {
                     "name": "Always Look",
                     "type": "Button",
-                    "id": "5fa7b639-8217-4e13-b988-c92c129ac950",
+                    "id": "c907e84c-5799-4ba4-b317-86ff11992f85",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -239,6 +263,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pan Key",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a087b9d-d31c-40f0-8063-84a3d2ab21df",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59fa47d9-f3a6-48ac-b410-b5646591083e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68ff632a-48b0-4fe1-9388-c5047ed900fa",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
