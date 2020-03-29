@@ -23,10 +23,10 @@ namespace BreakEdit
 		
 		[Header("Input System"), SerializeField]
 		private InputActionAsset inputAsset;
-		private InputAction movementAction;
+		private InputAction movementAction, movementVerticalAction;
+		private InputAction sprintAction;
 		private InputAction panAction;
 		private InputAction lookAction, lookAlwaysAction;
-		private InputAction sprintAction;
 		
 		#pragma warning restore 0649
 		
@@ -36,6 +36,10 @@ namespace BreakEdit
 		{
 			movementAction.Enable();
 			movementAction.started += OnMovementPress;
+			
+			movementVerticalAction.Enable();
+			movementVerticalAction.started += OnMovementPress;
+			
 			sprintAction.Enable();
 			
 			panAction.Enable();
@@ -48,6 +52,10 @@ namespace BreakEdit
 		{
 			movementAction.started -= OnMovementPress;
 			movementAction.Disable();
+			
+			movementVerticalAction.started -= OnMovementPress;
+			movementVerticalAction.Disable();
+			
 			sprintAction.Disable();
 			
 			panAction.Disable();
@@ -73,14 +81,21 @@ namespace BreakEdit
 		
 		private void Awake()
 		{
+			// Get the map
 			InputActionMap map = inputAsset.FindActionMap(ViewportMapID);
+			
+			// Define the actions
 			movementAction = map.FindAction(MovementActionID);
+			movementVerticalAction = map.FindAction(MovementVerticalActionID);
+			
 			sprintAction = map.FindAction(SprintActionID);
-
+			
 			panAction = map.FindAction(PanActionID);
+			
 			lookAction = map.FindAction(LookActionID);
 			lookAlwaysAction = map.FindAction(LookAlwaysActionID);
 			
+			// Set speed initial state
 			speed = beginningSpeed;
 		}
 		
@@ -92,17 +107,20 @@ namespace BreakEdit
 				lookAlwaysAction.ReadValue<Vector2>(),
 				Mathf.Abs(panAction.ReadValue<float>() - 1.0f) < Mathf.Epsilon
 			);
+			
+			Vector2 xz = movementAction.ReadValue<Vector2>();
+			float y = movementVerticalAction.ReadValue<float>();
 			HandleMovement
 			(
-				movementAction.ReadValue<Vector2>(),
+				new Vector3(xz.x, y, xz.y), 
 				Mathf.Abs(sprintAction.ReadValue<float>() - 1.0f) < Mathf.Epsilon
 			);
 		}
 		
-		protected virtual void HandleMovement(Vector2 input, bool sprint)
+		protected virtual void HandleMovement(Vector3 input, bool sprint)
 		{
 			// Check if key released
-			if(input == Vector2.zero && buttonHeld) buttonHeld = false;
+			if(input == Vector3.zero && buttonHeld) buttonHeld = false;
 			
 			Transform t = transform;
 			
@@ -111,8 +129,9 @@ namespace BreakEdit
 			if(sprint) input *= sprintMultiplier;
 			
 			// Move in camera direction
-			Vector3 moveVector = input.y * t.forward;
+			Vector3 moveVector = input.z * t.forward;
 			moveVector += input.x * t.right;
+			moveVector += input.y * Vector3.up;
 			
 			// Move
 			t.position += moveVector;

@@ -11,7 +11,7 @@ namespace BreakEdit.Utility
 		public bool freezeZ = false;
 		
 		// Components
-		private Transform cameraTransform;
+		protected Transform cameraTransform { get; private set; }
 		
 		private void Awake() => cameraTransform = FindObjectOfType<Camera>().transform;
 		
