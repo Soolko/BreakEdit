@@ -121,12 +121,18 @@ namespace BreakEdit
 			if(buttonHeld) speed += acceleration * Time.deltaTime;
 		}
 		
+		// Rotation vector
 		private Vector3 rotation;
 		
 		protected virtual void HandleLook(Vector2 input, Vector2 inputAlways, bool shouldPan)
 		{
+			// Mouse
 			if(shouldPan) rotation += new Vector3(-input.y, input.x, 0.0f) * sensitivity;
+			
+			// Arrow keys
 			rotation += new Vector3(-inputAlways.y, inputAlways.x, 0.0f) * keySensitivity;
+			
+			// Set rotation
 			transform.eulerAngles = rotation;
 		}
 	}
